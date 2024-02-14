@@ -58,17 +58,18 @@ export default class ChatCtrl {
 
     this.note = opts.noteId
       ? noteCtrl({
-          id: opts.noteId,
-          text: opts.noteText,
-          trans: this.trans,
-          redraw: this.redraw,
-        })
+        id: opts.noteId,
+        text: opts.noteText,
+        trans: this.trans,
+        redraw: this.redraw,
+      })
       : undefined;
 
     this.preset = presetCtrl({
       initialGroup: opts.preset,
       post: this.post,
       redraw: this.redraw,
+      get_data: this.get_data,
     });
 
     /* If discussion is disabled, and we have another chat tab,
@@ -92,6 +93,10 @@ export default class ChatCtrl {
 
   get plugin() {
     return this.opts.plugin;
+  }
+
+  get_data = (): ChatData => {
+    return this.data;
   }
 
   post = (text: string): boolean => {
